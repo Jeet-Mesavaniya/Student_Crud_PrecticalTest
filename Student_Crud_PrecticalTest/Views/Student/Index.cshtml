@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Student_Crud_PrecticalTest.Models.Student>
+@{
+}
+<div class="container">
+    <div class="col-12">
+        <h1>Student Record</h1>
+       
+        <form class="" asp-controller="Student" asp-action="Index">
+             <a class="btn btn-success m-1" asp-controller="Student" asp-action="AddStudent">
+                Add Student
+            </a>
+            <div class="input-group rounded">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="btnsearch" type="submit">Search</button>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <tr class="text-center">
+                <th>Actions</th>
+                <th class="hidden"> Student Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Gender</th>
+                <th>BirthDate</th>
+                <th>ContactNo</th>
+                <th>EmailId</th>
+                <th>City</th>
+                <th>Hobbies</th>
+                <th>Standard</th>
+            </tr>
+            @foreach(var dr in Model)
+            {
+                <tr class="text-center">
+                    <td> <a class="btn btn-sm btn-warning" asp-controller="Student" asp-action="Edit" asp-route-id="@dr.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-controller="Student" asp-action="Delete" asp-route-id="@dr.Id">Delete</a>
+                    </td>
+                    <td> @dr.Id</td>
+                    <td> @dr.FirstName</td>
+                    <td> @dr.LastName</td>
+                    <td> @dr.Gender</td>
+                    <td> @dr.BirthDate</td>
+                    <td> @dr.ContactNo</td>
+                    <td> @dr.EmailId</td>
+                    <td> @dr.City</td>
+                    <td> @dr.Hobbies</td>
+                    <td> @dr.Standard</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+@section scripts{
+<script>
+    $(function () {
+        debugger;
+            $("#btnsearch").click(function () {
+            $("Form").submit();
+        })
+    })
+</script>
+
+}
