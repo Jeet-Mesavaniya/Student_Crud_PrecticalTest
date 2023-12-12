@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Student_Crud_PrecticalTest.DataContext;
 using Student_Crud_PrecticalTest.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Student_Crud_PrecticalTest.Repos.Implementation;
+using Student_Crud_PrecticalTest.Migrations;
+using System.Text.RegularExpressions;
 
 namespace Student_Crud_PrecticalTest.Controllers
 {
@@ -13,6 +16,35 @@ namespace Student_Crud_PrecticalTest.Controllers
         public StudentController(StudentDbContext context)
         {
             this.context = context;
+        }
+
+        public IActionResult StudentListByAjax()
+        {
+            return View();
+        }
+        [HttpGet]
+        public JsonResult StudentListByAjaxGetData(string searchtext, StudentCrud ssb)
+        {
+            //StudentCrud ab = new StudentCrud();
+            return ssb.StudentListByAjaxGetData_b(searchtext, context);
+
+
+
+
+            //if (searchtext != null  && searchtext != "")
+            //{
+            //    var adata = from a in context.Students
+            //                where a.FirstName.Contains(searchtext) || a.LastName.Contains(searchtext)
+            //                select new Student
+            //                {
+            //                    FirstName = a.FirstName,
+            //                    LastName = a.LastName,
+            //                    Gender = a.Gender,
+            //                };
+            //    return new JsonResult(adata);
+            //}
+            //var data = context.Students.ToList();
+            //return new JsonResult(data);
         }
         public IActionResult Index(string search)
         {
@@ -43,6 +75,14 @@ namespace Student_Crud_PrecticalTest.Controllers
            
             if(model.Id == 0) 
             {
+                string pattern = @"^ (\+\d{ 1, 2 } \s)?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $";
+                string pattern2 = "^\\d{10}$";
+                var contact = model.ContactNo;
+                Match match = Regex.Match(contact, pattern2, RegexOptions.IgnoreCase);
+                if (!match.Success) 
+                {
+                    return View("AddStudent");
+                }
                 context.Students.Add(model);
                 await context.SaveChangesAsync();   
             }

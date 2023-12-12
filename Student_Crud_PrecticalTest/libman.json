@@ -5,6 +5,10 @@
     {
       "library": "jquery-validate@1.20.0",
       "destination": "wwwroot/jquery-validate/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/jquery/"
     }
   ]
 }

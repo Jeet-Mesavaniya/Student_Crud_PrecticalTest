@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Student_Crud_PrecticalTest.DataContext;
+using Student_Crud_PrecticalTest.Repos.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<StudentDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
+
+
+builder.Services.AddScoped<StudentCrud>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,5 +32,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Student}/{action=Index}/{id?}");
+    //pattern: "{controller=Student}/{action=StudentListByAjax}/{id?}");
 
 app.Run();
