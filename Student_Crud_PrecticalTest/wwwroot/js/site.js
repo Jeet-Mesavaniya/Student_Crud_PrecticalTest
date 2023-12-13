@@ -34,30 +34,55 @@ function getdata(searchtext) {
 	});
 
 }
-function validationnumber() {
-	debugger;
-	//jQuery("Formstudent").validate({
-	//	rules: {
-	//		FirstName: "Required"
-	//	},
-	//	messages: {
-	//		FirstName: "please enter valide name"
-	//	}
+//function validationnumber() {
+//	debugger;
+//	//jQuery("Formstudent").validate({
+//	//	rules: {
+//	//		FirstName: "Required"
+//	//	},
+//	//	messages: {
+//	//		FirstName: "please enter valide name"
+//	//	}
 
-	//});
-	//if ($("#FirstName").val() == "") {
-	//	alert("please enter name");
-	//	return false;
-	//}
+//	//});
+//	//if ($("#FirstName").val() == "") {
+//	//	alert("please enter name");
+//	//	return false;
+//	//}
 
-	var myPhoneRegex = "^ (\+\d{ 1, 2 } \s)?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $";
+//	var myPhoneRegex = /^ (\+\d{ 1, 2 } \s)?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/;
 
-	var contact = $("#contactno").val();
-	if (myPhoneRegex.test(contact)) {
-		alert("nomber is OK");
-	}
-	else { alert("please enter valide numbere"); return false; }
+//	var contact = $("#contactno").val();
+//	if (myPhoneRegex.test(contact)) {
+//		alert("nomber is OK");
+//	}
+//	else { alert("please enter valide numbere"); return false; }
 	
 
+
+//}
+
+function validation() {
+	debugger
+	var firstname = document.getElementById('FirstName').value;
+	var lastname = document.getElementById('LastName').value;
+
+	var firstnamecheck = /^[A-Za-z]{5,15}$/;
+	var lastnamecheck = /^[A-Za-z]{5,15}$/;
+
+	document.getElementById('FirstNameError').innerHTML = "";
+	document.getElementById('LastNameError').innerHTML = "";
+
+	if (!firstnamecheck.test(firstname)) {
+		document.getElementById('FirstNameError').innerHTML = "Invalide First Name format";
+		return
+	}
+
+	if (!lastnamecheck.test(lastname)) {
+		document.getElementById('LastNameError').innerHTML = "Invalide Last Name format";
+		return
+	}
+
+	alert("Form is valid! Submitting...");
 
 }
